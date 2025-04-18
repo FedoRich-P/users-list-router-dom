@@ -1,11 +1,8 @@
 import {useFetch} from "../../useFetchData.ts";
 import {Post} from "../types/post.ts";
-import {useMemo} from "react";
 
-export const usePostsByUserId = (userId: number,value: string, enabled = true) => {
-    const url = useMemo(() => {
-        return `${import.meta.env.VITE_API_URL}/posts?userId=${userId}&title_like=${value || ''}`;
-    }, [userId, value]);
+export const useSearchPostsByUserId = (userId: number, value:string, enabled = true) => {
+    const url = `${import.meta.env.VITE_API_URL}/posts?userId=${userId}&title_like=${value}`;
     const { data: posts, loading, error } = useFetch<Post[]>(url, enabled);
     return { posts: posts || [], loading, error };
 };
